@@ -10,8 +10,6 @@ set(OPENMHT_VERSION_DATE "2012.12.30")
 # give OPENMHT 1 series a few more soversions
 set(OPENMHT_SOVERSION "00")
 
-set(CMAKE_INSTALL_PREFIX /usr/local)
-
 # fetch all the local directories for generated code
 get_filename_component(OPENMHT_LIB_DIR ./lib ABSOLUTE)
 get_filename_component(OPENMHT_BIN_DIR ./bin ABSOLUTE)
@@ -42,8 +40,8 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${OPENMHT_LIB_DIR} CACHE PATH
 ########################################################
 # Include Munkres
 ########################################################
-include_directories(/usr/local/include/munkres)
-include_directories(/usr/local/include/munkres/adapters)
+include_directories(${CMAKE_SOURCE_DIR}/${MUNKRES_INCLUDE_PATH}/munkres)
+include_directories(${CMAKE_SOURCE_DIR}/${MUNKRES_INCLUDE_PATH}/munkres/adapters)
 
 ########################################################
 # Find Boost
@@ -65,7 +63,7 @@ include_directories(${OPENMHT_INC_DIR})
 ## copy to openmht/include
 file(GLOB_RECURSE INCLUDE_FILES RELATIVE ${OPENMHT_SRC_DIR} src/*.h)
 foreach(I ${INCLUDE_FILES})
-  configure_file(${OPENMHT_SRC_DIR}/${I} ${OPENMHT_INC_DIR}/openmht/${I} @ONLY)
+  configure_file(${OPENMHT_SRC_DIR}/${I} ${OPENMHT_INC_DIR}/${I} @ONLY)
 endforeach()
 
 add_subdirectory(src)
@@ -76,13 +74,13 @@ add_subdirectory(share)
 # Installation
 # 
 ###############################################################################
-set(PKGCONFIG_INSTALL_ONLY ON CACHE BOOL "Only install pkgconfig file")
+#set(PKGCONFIG_INSTALL_ONLY ON CACHE BOOL "Only install pkgconfig file")
 
 if (NOT PKGCONFIG_INSTALL_ONLY)
   set(CMAKE_INSTALL_PREFIX_SHADOW ${CMAKE_INSTALL_PREFIX})
   
   install(DIRECTORY ${OPENMHT_LIB_DIR}/ 
-    DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/openmht
+    DESTINATION ${CMAKE_INSTALL_PREFIX}/lib
     )
 
   # Install header files to system
