@@ -63,7 +63,7 @@ include_directories(${OPENMHT_INC_DIR})
 ## copy to openmht/include
 file(GLOB_RECURSE INCLUDE_FILES RELATIVE ${OPENMHT_SRC_DIR} src/*.h)
 foreach(I ${INCLUDE_FILES})
-  configure_file(${OPENMHT_SRC_DIR}/${I} ${OPENMHT_INC_DIR}/${I} @ONLY)
+  configure_file(${OPENMHT_SRC_DIR}/${I} ${OPENMHT_INC_DIR}/openmht/${I} @ONLY)
 endforeach()
 
 add_subdirectory(src)
@@ -89,7 +89,7 @@ if (NOT PKGCONFIG_INSTALL_ONLY)
   # TODO, since we removed include directory during development builds, we need
   # to add a new rule here to create the include directory before installation.
   INSTALL(
-    DIRECTORY ${OPENMHT_INC_DIR} 
+    DIRECTORY ${OPENMHT_INC_DIR}
     DESTINATION ${CMAKE_INSTALL_PREFIX}
     FILES_MATCHING REGEX .*\\.h|.*\\.proto|.*\\.inl
     )
