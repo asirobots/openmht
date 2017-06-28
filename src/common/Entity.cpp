@@ -60,8 +60,10 @@ namespace openmht {
      void Entity::init(int id, Measurement &meas)
      {
           occluded_dead_age_ = 10;
+	  occluded_age_ = 0;
           id_ = id;
           age_ = 0;
           tracker_.set_measurement(meas.position());          
      }
 }
+
