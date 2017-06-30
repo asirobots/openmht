@@ -122,6 +122,6 @@ IF(UNIX AND NOT APPLE)
   # - Install the openmht.pc file to lib/pkgconfig
   install (
     FILES "${CMAKE_CURRENT_BINARY_DIR}/openmht.pc"
-    DESTINATION "/usr/local/lib/pkgconfig"
+    DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig"
     )
 ENDIF()
